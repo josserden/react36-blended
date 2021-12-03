@@ -1,16 +1,16 @@
-import { Suspense } from 'react';
-import { Routes, Route, Outlet, Link } from 'react-router-dom';
+import { Suspense } from "react";
+import { Routes, Route, Outlet, Link } from "react-router-dom";
 
-import Loader from './components/Loader';
-import Layout from './components/Layout';
+import Loader from "./components/Loader";
+import Layout from "./components/Layout";
 
-import HomePage from './views/HomePage';
-import MoviesPage from './views/MoviesPage';
-import MovieDetailsPage from './views/HomePage';
-import NoMatch from './views/NotFound';
+import HomePage from "./views/HomePage";
+import MoviesPage from "./views/MoviesPage";
+import MovieDetailsPage from "./views/HomePage";
+import NoMatch from "./views/NotFound";
 
-import Cast from './components/Cast';
-import Reviews from './components/Reviews';
+import Cast from "./components/Cast";
+import Reviews from "./components/Reviews";
 
 function App() {
   return (
