@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function Reviews({ arr }) {
-  return <div></div>;
+export default function Reviews() {
+  return <div>Reviews</div>;
 }
