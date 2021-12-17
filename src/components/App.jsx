@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Section,
   Container,
@@ -10,77 +11,28 @@ import {
   RemoveBtn,
   TodoText,
   Checkbox,
-} from '../App.styled';
+} from "../App.styled";
+import { InputField } from "./InputField";
+import { addTodo } from "../redux/todo/sliceTodo";
+import { TodoList } from "./TodoList";
 
 function App() {
-  const [todos, setTodos] = useState([]);
-  const [text, setText] = useState('');
+  // const [todos, setTodos] = useState([]);
+  const [text, setText] = useState("");
 
-  const addTodo = () => {
-    if (text.trim().length) {
-      setTodos([
-        ...todos,
-        {
-          id: new Date().toISOString(),
-          text,
-          completed: false,
-        },
-      ]);
-      setText('');
-    }
-  };
+  const dispatch = useDispatch();
 
-  const handleInput = (event) => {
-    setText(event.target.value);
-  };
-
-  const removeTodo = (todoId) => {
-    setTodos(todos.filter((todo) => todo.id !== todoId));
-  };
-
-  const handleTodoComplete = (todoId) => {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id !== todoId) return todo;
-
-        return { ...todo, completed: !todo.completed };
-      })
-    );
+  const addTask = () => {
+    dispatch(addTodo({ text }));
+    setText("");
   };
 
   return (
     <Section>
       <Container>
         <Heading>Todo Redux Toolkit</Heading>
-
-        <Label>
-          Create Your Todo
-          <Wrapper>
-            <Input
-              type="text"
-              value={text}
-              placeholder="Your message"
-              onChange={handleInput}
-            />
-            <Button onClick={addTodo}>Add Todo</Button>
-          </Wrapper>
-        </Label>
-
-        <ul>
-          {todos.map((todo) => {
-            <li key={todo.id}>
-              <Checkbox
-                type="checkbox"
-                checked={todo.completed}
-                onChange={handleTodoComplete}
-              />
-
-              <TodoText>{todo.text}</TodoText>
-
-              <RemoveBtn onClick={removeTodo}>&times;</RemoveBtn>
-            </li>;
-          })}
-        </ul>
+        <InputField text={text} onChange={setText} onClick={addTask} />
+        <TodoList />
       </Container>
     </Section>
   );
